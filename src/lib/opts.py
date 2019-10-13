@@ -224,6 +224,10 @@ class opts(object):
     self.parser.add_argument('--eval_oracle_dep', action='store_true', 
                              help='use ground truth depth.')
 
+    #ds
+    self.parser.add_argument('--fonts', type=str, default='../../resources/fonts/Hack-Regular.ttf',
+                             help='drop learning rate by 10.')
+
   def parse(self, args=''):
     if args == '':
       opt = self.parser.parse_args()

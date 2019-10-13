@@ -188,6 +188,8 @@ def generate_batch(
         #         , "wh_gt": wh_gt
     }
 
+def get_font(file, size=50):
+    ImageFont.truetype(file, size)
 
 import torch.utils.data as data
 

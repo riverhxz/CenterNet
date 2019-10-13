@@ -6,7 +6,7 @@ import os
 from torch import nn
 import cv2
 
-from datasets.sample.char_gen import CTNumberDataset
+from datasets.sample.char_gen import CTNumberDataset, get_font
 from logger import Logger
 from models.model import save_model, load_model
 from models.networks.generized_detector import GeneralizedDetector
@@ -58,9 +58,8 @@ def main():
     from opts import opts
     opt = opts.init("")
     logger = Logger(opt)
-
     val_loader = torch.utils.data.DataLoader(
-        CTNumberDataset(start=100000, length=10000, transform=data_transform_composed),
+        CTNumberDataset(start=100000, length=10000, transform=data_transform_composed, font=get_font(opts.font)),
         batch_size=1,
         shuffle=False,
         num_workers=1,
@@ -68,7 +67,7 @@ def main():
     )
 
     train_loader = torch.utils.data.DataLoader(
-        CTNumberDataset(0, 100000, transform=data_transform_composed),
+        CTNumberDataset(start=100000, length=10000, transform=data_transform_composed, font=get_font(opts.font)),
         batch_size=opt.batch_size,
         shuffle=True,
         num_workers=opt.num_workers,
