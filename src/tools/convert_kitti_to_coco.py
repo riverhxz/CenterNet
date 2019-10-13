@@ -68,9 +68,9 @@ for SPLIT in SPLITS:
   ann_dir = DATA_PATH + 'training/label_2/'
   calib_dir = DATA_PATH + '{}/calib/'
   splits = ['train', 'val']
-  # splits = ['trainval', 'test']
+  # splits = ['trainval', 'utest']
   calib_type = {'train': 'training', 'val': 'training', 'trainval': 'training',
-                'test': 'testing'}
+                'utest': 'testing'}
 
   for split in splits:
     ret = {'images': [], 'annotations': [], "categories": cat_info}
@@ -86,7 +86,7 @@ for SPLIT in SPLITS:
                     'id': int(image_id),
                     'calib': calib.tolist()}
       ret['images'].append(image_info)
-      if split == 'test':
+      if split == 'utest':
         continue
       ann_path = ann_dir + '{}.txt'.format(line)
       # if split == 'val':

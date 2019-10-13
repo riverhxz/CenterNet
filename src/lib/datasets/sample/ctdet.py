@@ -4,8 +4,7 @@ from __future__ import print_function
 
 import torch.utils.data as data
 import numpy as np
-import torch
-import json
+
 import cv2
 import os
 from utils.image import flip, color_aug

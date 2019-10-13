@@ -602,10 +602,11 @@ class DLASeg(nn.Module):
         x = self.dla_up(x[self.first_level:])
         # x = self.fc(x)
         # y = self.softmax(self.up(x))
-        ret = {}
+        ret = []
         for head in self.heads:
-            ret[head] = self.__getattr__(head)(x)
-        return [ret]
+            ret.append(self.__getattr__(head)(x))
+
+        return ret
 
     '''
     def optim_parameters(self, memo=None):

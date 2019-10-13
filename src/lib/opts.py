@@ -15,7 +15,7 @@ class opts(object):
     self.parser.add_argument('--dataset', default='coco',
                              help='coco | kitti | coco_hp | pascal')
     self.parser.add_argument('--exp_id', default='default')
-    self.parser.add_argument('--test', action='store_true')
+    self.parser.add_argument('--utest', action='store_true')
     self.parser.add_argument('--debug', type=int, default=0,
                              help='level of visualization.'
                                   '1: only show the final detection results'
@@ -96,13 +96,13 @@ class opts(object):
                              help='number of epochs to run validation.')
     self.parser.add_argument('--trainval', action='store_true',
                              help='include validation in training and '
-                                  'test on test set')
+                                  'utest on utest set')
 
-    # test
+    # utest
     self.parser.add_argument('--flip_test', action='store_true',
                              help='flip data augmentation.')
     self.parser.add_argument('--test_scales', type=str, default='1',
-                             help='multi scale test augmentation.')
+                             help='multi scale utest augmentation.')
     self.parser.add_argument('--nms', action='store_true',
                              help='run nms in testing.')
     self.parser.add_argument('--K', type=int, default=100,

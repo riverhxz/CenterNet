@@ -25,7 +25,7 @@ class KITTI(data.Dataset):
     self.data_dir = os.path.join(opt.data_dir, 'kitti')
     self.img_dir = os.path.join(self.data_dir, 'images', 'trainval')
     if opt.trainval:
-      split = 'trainval' if split == 'train' else 'test'
+      split = 'trainval' if split == 'train' else 'utest'
       self.img_dir = os.path.join(self.data_dir, 'images', split)
       self.annot_path = os.path.join(
         self.data_dir, 'annotations', 'kitti_{}.json').format(split)

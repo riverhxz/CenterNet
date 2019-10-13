@@ -62,6 +62,7 @@ def main(opt):
       pin_memory=True,
       drop_last=True
   )
+  model.
 
   print('Starting training...')
   best = 1e10
