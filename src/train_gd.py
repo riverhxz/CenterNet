@@ -13,7 +13,7 @@ from models.model import save_model, load_model
 from models.networks.generized_detector import GeneralizedDetector
 from trains.gdet import CtdetTrainer
 
-os.environ['CUDA_VISIBLE_DEVICES'] = "2"
+# os.environ['CUDA_VISIBLE_DEVICES'] = "2"
 os.environ['CUDA_LAUNCH_BLOCKING']="1"
 
 

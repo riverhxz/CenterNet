@@ -335,8 +335,10 @@ class opts(object):
         opt.heads.update({'hp_offset': 2})
     else:
       assert 0, 'task not defined!'
-    print('heads', opt.heads)
     opt.device = torch.device('cuda' if opt.gpus[0] >= 0 else 'cpu')
+
+    print('heads', opt.heads)
+    print("device",opt.device)
     return opt
 
   def init(self, args=''):

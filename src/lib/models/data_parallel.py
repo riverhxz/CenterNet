@@ -3,7 +3,7 @@ from torch.nn.modules import Module
 from torch.nn.parallel.scatter_gather import gather
 from torch.nn.parallel.replicate import replicate
 from torch.nn.parallel.parallel_apply import parallel_apply
-
+from torch.nn.parallel.distributed import DistributedDataParallel as DDP
 
 from .scatter_gather import scatter_kwargs
 
@@ -117,12 +117,14 @@ def data_parallel(module, inputs, device_ids=None, output_device=None, dim=0, mo
     return gather(outputs, output_device, dim)
 
 def DataParallel(module, device_ids=None, output_device=None, dim=0, chunk_sizes=None):
+    torch.cuda.set_device(device_ids)
+    module=module.cuda(device_ids)
     if chunk_sizes is None:
-        return torch.nn.DataParallel(module, device_ids, output_device, dim)
+        return DDP(module, device_ids, output_device, dim)
     standard_size = True
     for i in range(1, len(chunk_sizes)):
         if chunk_sizes[i] != chunk_sizes[0]:
             standard_size = False
     if standard_size:
-        return torch.nn.DataParallel(module, device_ids, output_device, dim)
+        return DDP(module, device_ids, output_device, dim)
     return _DataParallel(module, device_ids, output_device, dim, chunk_sizes)
