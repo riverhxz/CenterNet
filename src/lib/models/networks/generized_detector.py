@@ -70,7 +70,7 @@ class BackBone(nn.Module):
 
 
 class GeneralizedDetector(nn.Module):
-    def __init__(self, needle_model, stack_model, feature_map_dim=256):
+    def __init__(self, feature_map_dim=256):
         super(GeneralizedDetector, self).__init__()
 
         stack_model = EfficientNet.from_pretrained('efficientnet-b0')

@@ -55,13 +55,13 @@ def main():
         lambda x: transform_by_keys(x, to_ncwh, ["needle", "stack"])
         , lambda x: transform_by_keys(x, to_tensor, x.keys())
     ])
-
-    opt = opts()
     Dataset = CTNumberDataset
-    opt.update_dataset_info_and_set_heads(opt, Dataset)
+    opt = opts().parse()
+    opt= opts().update_dataset_info_and_set_heads(opt, Dataset)
+    cv2.setNumThreads(0)
     logger = Logger(opt)
     val_loader = torch.utils.data.DataLoader(
-        CTNumberDataset(start=100000, length=10000, transform=data_transform_composed, font=get_font(opts.font)),
+        CTNumberDataset(start=100000, length=10000, transform=data_transform_composed, font=get_font(opt.font)),
         batch_size=1,
         shuffle=False,
         num_workers=1,
@@ -69,7 +69,7 @@ def main():
     )
 
     train_loader = torch.utils.data.DataLoader(
-        CTNumberDataset(start=100000, length=10000, transform=data_transform_composed, font=get_font(opts.font)),
+        CTNumberDataset(start=100000, length=10000, transform=data_transform_composed, font=get_font(opt.font)),
         batch_size=opt.batch_size,
         shuffle=True,
         num_workers=opt.num_workers,
@@ -79,6 +79,7 @@ def main():
 
     best = 1e10
     start_epoch = -1
+
     model = GeneralizedDetector()
 
     optimizer = torch.optim.Adam(model.parameters(), opt.lr)

@@ -5,6 +5,7 @@ from __future__ import print_function
 import argparse
 import os
 import sys
+import torch
 
 class opts(object):
   def __init__(self):
@@ -223,9 +224,9 @@ class opts(object):
                              help='use ground truth human joint local offset.')
     self.parser.add_argument('--eval_oracle_dep', action='store_true', 
                              help='use ground truth depth.')
-
+    self.parser.add_argument('--test', action='store_true')
     #ds
-    self.parser.add_argument('--font', type=str, default='../../resources/fonts/Hack-Regular.ttf',
+    self.parser.add_argument('--font', default='../resources/fonts/Hack-Regular.ttf',
                              help='drop learning rate by 10.')
 
   def parse(self, args=''):
@@ -335,6 +336,7 @@ class opts(object):
     else:
       assert 0, 'task not defined!'
     print('heads', opt.heads)
+    opt.device = torch.device('cuda' if opt.gpus[0] >= 0 else 'cpu')
     return opt
 
   def init(self, args=''):
