@@ -195,6 +195,12 @@ import torch.utils.data as data
 
 
 class CTNumberDataset(data.Dataset):
+    num_classes = 3
+    default_resolution = [512, 512]
+    mean = np.array([0.40789654, 0.44719302, 0.47026115],
+                    dtype=np.float32).reshape(1, 1, 3)
+    std = np.array([0.28863828, 0.27408164, 0.27809835],
+                   dtype=np.float32).reshape(1, 1, 3)
 
     def __init__(self, start=0, length=100000, transform=None,
                   size=[256, 256, 3]

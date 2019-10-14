@@ -225,7 +225,7 @@ class opts(object):
                              help='use ground truth depth.')
 
     #ds
-    self.parser.add_argument('--fonts', type=str, default='../../resources/fonts/Hack-Regular.ttf',
+    self.parser.add_argument('--font', type=str, default='../../resources/fonts/Hack-Regular.ttf',
                              help='drop learning rate by 10.')
 
   def parse(self, args=''):

@@ -5,7 +5,8 @@ import random
 import os
 from torch import nn
 import cv2
-
+import sys
+from opts import opts
 from datasets.sample.char_gen import CTNumberDataset, get_font
 from logger import Logger
 from models.model import save_model, load_model
@@ -55,8 +56,9 @@ def main():
         , lambda x: transform_by_keys(x, to_tensor, x.keys())
     ])
 
-    from opts import opts
-    opt = opts.init("")
+    opt = opts()
+    Dataset = CTNumberDataset
+    opt.update_dataset_info_and_set_heads(opt, Dataset)
     logger = Logger(opt)
     val_loader = torch.utils.data.DataLoader(
         CTNumberDataset(start=100000, length=10000, transform=data_transform_composed, font=get_font(opts.font)),
@@ -118,3 +120,5 @@ def main():
                 param_group['lr'] = lr
     logger.close()
 
+if __name__ == '__main__':
+    main()
